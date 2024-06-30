@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: caching-service
+
+cache:
+  ttl:
+    defaultTtl: 10
+
+service:
+  todos: https://jsonplaceholder.typicode.com
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+logging:
+  level:
+    dev.abarcan: debug
