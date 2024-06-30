@@ -2,6 +2,15 @@ spring:
   application:
     name: caching-service
 
+  cache:
+    redis:
+      key-prefix: 'myCustom::'
+      use-key-prefix: true
+      time-to-live: 60000
+      cache-null-values: false
+      enable-statistics: true
+    type: simple
+
 cache:
   ttl:
     defaultTtl: 10
@@ -13,13 +22,21 @@ management:
   endpoint:
     health:
       show-details: always
+
   health:
     circuitbreakers:
+      enabled: true
+    redis:
+      enabled: true
+    livenessstate:
+      enabled: true
+    readinessstate:
       enabled: true
   endpoints:
     web:
       exposure:
         include: health
+
 logging:
   level:
     dev.abarcan: debug

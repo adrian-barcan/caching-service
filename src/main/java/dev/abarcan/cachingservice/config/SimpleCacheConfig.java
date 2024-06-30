@@ -1,6 +1,7 @@
 package dev.abarcan.cachingservice.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -8,12 +9,11 @@ import org.springframework.context.annotation.Import;
 
 @Slf4j
 @Configuration
-@Import({RedisAutoConfiguration.class})
-@ConditionalOnProperty(value="spring.cache.type", havingValue = "redis")
-public class RedisConfig {
+@EnableAutoConfiguration(exclude = RedisAutoConfiguration.class)
+@ConditionalOnProperty(value="spring.cache.type", havingValue = "simple")
+public class SimpleCacheConfig {
 
-    public RedisConfig() {
-        log.info("Redis cache active...");
+    public SimpleCacheConfig() {
+        log.info("In Memory cache active...");
     }
-
 }
